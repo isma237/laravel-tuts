@@ -1,0 +1,9 @@
+.app-name {
+    color: #F16E00 !important;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+}
+
+.ticket-id {
+    font-weight: 700;
+}
