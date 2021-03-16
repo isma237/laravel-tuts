@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -36,7 +38,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $password = \Illuminate\Support\Str::random(10);
+
+        $message = "Email " . $user->email ." -Password: " .$password;
+        Log::info($message);
+
+        $user->password = Hash::make($password);
+
+        $user->save();
     }
 
     /**

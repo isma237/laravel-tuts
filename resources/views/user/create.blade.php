@@ -17,7 +17,6 @@
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email"/>
                 </div>
-
                 <div class="mb-2">
                     <button type="submit" class="btn btn-md btn-success">Enregistrer</button>
                 </div>
