@@ -38,17 +38,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $password = \Illuminate\Support\Str::random(10);
+        $exist = User::where('email', $request->email)->first();
+        if($exist == null){
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $password = \Illuminate\Support\Str::random(10);
+            $message = "Email " . $user->email ." -Password: " .$password;
+            Log::info($message);
+            $user->password = Hash::make($password);
+            $user->save();
 
-        $message = "Email " . $user->email ." -Password: " .$password;
-        Log::info($message);
+            return view('user.index');
+        }
+        dd("Email déjà présent en base de données");
 
-        $user->password = Hash::make($password);
 
-        $user->save();
     }
 
     /**
