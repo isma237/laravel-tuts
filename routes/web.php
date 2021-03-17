@@ -21,6 +21,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::post('/', [HomeController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::post('/dashboard/set-agent', [DashboardController::class, 'setAgentToTicket']);
 
 Route::post('/post', function (Request $request){
    return view('/');

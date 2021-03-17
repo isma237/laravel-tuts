@@ -34,6 +34,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link
+                            {{request()->is('admin/user') ? 'active' : ''}}"
+                       href="{{url('admin/user')}}"
+                    >Espace administrateur</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link
                             {{request()->is('dashboard') ? 'active' : ''}}"
                        href="{{url('dashboard')}}"
                     >Dashboard</a>

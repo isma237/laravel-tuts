@@ -13,7 +13,8 @@
             <td>Description</td>
             <td>Date de création</td>
             <td>Statut</td>
-            <td>Ressource</td>
+            <td>Agent ID</td>
+            <td>Action</td>
         </tr>
         </thead>
         <tbody>
@@ -24,6 +25,27 @@
                     <td>{{ $ticket->created_at }}</td>
                     <td>{{ $ticket->status }}</td>
                     <td>{{ $ticket->user_id }}</td>
+                    <td>
+                        <form class="row gy-2 gx-3 align-items-center" method="POST" action="{{url('/dashboard/set-agent')}}">
+                            @csrf
+                            <div class="col-auto">
+                                <input type="number" name="ticket_id"
+                                       value="{{$ticket->id}}" hidden>
+                            </div>
+                            <div class="col-auto">
+                                <select class="form-select" aria-label="Default select example"
+                                        name="agent_id">
+                                    <option selected>Open this select menu</option>
+                                    @foreach($agents as $agent)
+                                        <option value="{{$agent->id}}">{{$agent->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-sm btn-primary">Enregistrer</button>
+                            </div>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
