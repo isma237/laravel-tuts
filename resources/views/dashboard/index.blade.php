@@ -37,7 +37,9 @@
                                         name="agent_id">
                                     <option selected>Open this select menu</option>
                                     @foreach($agents as $agent)
-                                        <option value="{{$agent->id}}">{{$agent->name}}</option>
+                                        @if($agent->id != $ticket->user_id)
+                                            <option value="{{$agent->id}}">{{$agent->name}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

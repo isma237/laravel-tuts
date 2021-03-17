@@ -10,7 +10,6 @@ class DashboardController extends Controller
 {
     public function index(){
         $ticket = new Ticket();
-
         return view('dashboard.index',
             array(
                 'tickets' => $ticket->getTicketByStatus(),
@@ -21,6 +20,12 @@ class DashboardController extends Controller
 
 
     public function setAgentToTicket(Request $request){
-        dd($request);
+        $ticket = Ticket::find($request->ticket_id);
+
+        $ticket->user_id = $request->agent_id;
+        $ticket->status = 'Started';
+        $ticket->save();
+
+        return back();
     }
 }

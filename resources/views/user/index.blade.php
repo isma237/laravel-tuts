@@ -6,7 +6,7 @@
             <h3>Liste des utilisateurs</h3>
         </div>
         <div class="col-6 mt-3 text-end">
-            <button class="btn btn-sm btn-primary">Ajouter un utilisateur</button>
+            <a href="{{url('/admin/user/create')}}">Ajouter un utilisateur</a>
         </div>
     </div>
 @endsection
