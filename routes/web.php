@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use \App\Http\Controllers\UserController;
+use \App\Http\Controllers\SigninController;
 use \http\Env\Request;
 
 /*
@@ -29,6 +30,10 @@ Route::post('/post', function (Request $request){
 
 
 Route::resource('/admin/user', UserController::class);
+
+//signinController
+Route::get('/signin', [SigninController::class, 'index']);
+Route::post('signin/login', [SigninController::class, 'login']);
 
 
 //TODO 1: Gestion des utilisateurs
