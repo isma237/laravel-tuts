@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\SigninController;
+use \App\Http\Controllers\TicketController;
 use \http\Env\Request;
 
 /*
@@ -21,19 +22,22 @@ use \http\Env\Request;
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/', [HomeController::class, 'store']);
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::post('/dashboard/set-agent', [DashboardController::class, 'setAgentToTicket']);
 
 Route::post('/post', function (Request $request){
    return view('/');
 });
 
-
 Route::resource('/admin/user', UserController::class);
 
 //signinController
 Route::get('/signin', [SigninController::class, 'index']);
 Route::post('signin/login', [SigninController::class, 'login']);
+Route::get('/tickets',[TicketController::class, 'index']);
+Route::get('/test', function (){
+   return \Illuminate\Support\Facades\Auth::id();
+});
 
 
 //TODO 1: Gestion des utilisateurs

@@ -40,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getTickets(){
+        $tickets = Ticket::where("user_id", $this->id)->get();
+        return $tickets;
+    }
+
+
+    public function tickets(){
+        return $this->hasMany(Ticket::class);
+    }
 }

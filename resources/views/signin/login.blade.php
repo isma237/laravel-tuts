@@ -1,5 +1,11 @@
 @extends('master')
 @section('content')
+    @if(\Illuminate\Support\Facades\Session::has('error_login'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{\Illuminate\Support\Facades\Session::get('error_login')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12 mt-3">
             <form method="POST" action="{{url('signin/login')}}">
