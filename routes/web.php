@@ -19,7 +19,7 @@ use \http\Env\Request;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/', [HomeController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -32,9 +32,11 @@ Route::post('/post', function (Request $request){
 Route::resource('/admin/user', UserController::class);
 
 //signinController
-Route::get('/signin', [SigninController::class, 'index']);
+Route::get('/signin', [SigninController::class, 'index'])->name('login');
+Route::get('/signin/logout', [SigninController::class, 'logout']);
 Route::post('signin/login', [SigninController::class, 'login']);
-Route::get('/tickets',[TicketController::class, 'index']);
+Route::get('/tickets',[TicketController::class, 'index'])->middleware('auth');
+
 Route::get('/test', function (){
    return \Illuminate\Support\Facades\Auth::id();
 });

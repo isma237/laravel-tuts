@@ -28,18 +28,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link
-                            {{request()->is('tickets') ? 'active' : ''}}"
-                       href="{{url('tickets')}}"
-                    >Mes tickets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link
-                            {{request()->is('admin/user') ? 'active' : ''}}"
-                       href="{{url('admin/user')}}"
-                    >Espace administrateur</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link
                             {{request()->is('dashboard') ? 'active' : ''}}"
                        href="{{url('dashboard')}}"
                     >Dashboard</a>
@@ -47,10 +35,35 @@
 
                 <li class="nav-item">
                     <a class="nav-link
-                            {{request()->is('signin') ? 'active' : ''}}"
-                       href="{{url('signin')}}"
-                    >Connexion</a>
+                            {{request()->is('admin/user') ? 'active' : ''}}"
+                       href="{{url('admin/user')}}"
+                    >Espace administrateur</a>
                 </li>
+
+                @if(@auth()->check())
+
+                    <li class="nav-item">
+                        <a class="nav-link
+                            {{request()->is('tickets') ? 'active' : ''}}"
+                           href="{{url('tickets')}}"
+                        >Mes tickets</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{url('/signin/logout')}}"
+                        >Deconnexion</a>
+                    </li>
+
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link
+                            {{request()->is('signin') ? 'active' : ''}}"
+                           href="{{url('signin')}}"
+                        >Connexion</a>
+                    </li>
+                @endif
+
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Entrer l'ID d'un ticket" aria-label="Search">
