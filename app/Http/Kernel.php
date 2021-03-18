@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http;
-
+use App\Http\Middleware\CheckRole;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -43,6 +43,11 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'checkIfUserIsAdmin' => [
+            \App\Http\Middleware\Authenticate::class,
+            CheckRole::class
+        ]
+
     ];
 
     /**

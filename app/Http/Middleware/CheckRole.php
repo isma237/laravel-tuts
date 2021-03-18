@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
@@ -16,7 +17,14 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-        //
-        return $next($request);
+        $user = Auth::user();
+        $roles = $user->roles;
+        foreach ($roles as $role){
+            if($role->name == 'Administrateur'){
+                return $next($request);
+            }
+        }
+        return redirect()->route('home');
+
     }
 }

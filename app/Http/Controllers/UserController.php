@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -19,6 +20,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        foreach ($users as $user){
+            $user['roles'] = $user->roles;
+        }
+
         return view('user.index', ['users'=>  $users]);
     }
 
@@ -67,11 +72,10 @@ class UserController extends Controller
     public function show($id)
     {
        $user = User::find($id);
-       $roles = Role::all();
 
        return view('user.update', [
-           'user'   => $user,
-           'roles'  => $roles
+           'user'       => $user,
+           'roles'      => Role::all()
        ]);
 
     }
@@ -100,15 +104,23 @@ class UserController extends Controller
 
         $exists = UserRole::where('user_id', $id)->get();
 
-        foreach ($exists as $role){
-            $role->delete();
-        }
+        DB::beginTransaction();
+        try {
+            foreach ($exists as $role){
+                $role->delete();
+            }
 
-        foreach ($roles as $roleId){
-            $userRole = new UserRole();
-            $userRole->user_id = $id;
-            $userRole->role_id = $roleId;
-            $userRole->save();
+            foreach ($roles as $roleId){
+                $userRole = new UserRole();
+                $userRole->user_id = $id;
+                $userRole->role_id = $roleId;
+                $userRole->save();
+            }
+            DB::commit();
+
+        }catch (\Exception $e){
+            Log::error('Error: '. $e->getMessage());
+            DB::rollBack();
         }
 
     }

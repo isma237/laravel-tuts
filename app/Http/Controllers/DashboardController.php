@@ -21,14 +21,9 @@ class DashboardController extends Controller
 
 
     public function setAgentToTicket(Request $request){
-
-        if(Auth::check()){
-            $ticket = Ticket::find($request->ticket_id);
-
-            $ticket->user_id = $request->agent_id;
-            $ticket->status = 'Started';
-            $ticket->save();
-        }
-        return back();
+        $ticket = Ticket::find($request->ticket_id);
+        $ticket->user_id = $request->agent_id;
+        $ticket->status = 'Started';
+        $ticket->save();
     }
 }

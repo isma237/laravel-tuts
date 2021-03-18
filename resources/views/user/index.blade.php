@@ -28,7 +28,11 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>-</td>
+                            <td>
+                                @foreach($user->roles as $role)
+                                    <span class="badge bg-secondary">{{ $role->name }}</span>
+                                @endforeach
+                            </td>
                             <td><a href="{{url('/admin/user/' .$user->id)}}">Voir plus</a> </td>
                         </tr>
                     @endforeach

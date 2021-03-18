@@ -23,13 +23,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/', [HomeController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::post('/dashboard/set-agent', [DashboardController::class, 'setAgentToTicket']);
+Route::post('/dashboard/set-agent', [DashboardController::class, 'setAgentToTicket'])->middleware('auth');
 
 Route::post('/post', function (Request $request){
    return view('/');
 });
 
-Route::resource('/admin/user', UserController::class);
+Route::resource('/admin/user', UserController::class)->middleware('checkIfUserIsAdmin');
 
 //signinController
 Route::get('/signin', [SigninController::class, 'index'])->name('login');
