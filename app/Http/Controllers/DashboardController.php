@@ -27,23 +27,6 @@ class DashboardController extends Controller
     }
 
     public function statistique(){
-        //$results = DB::sel("select SUBSTRING(`created_at`, 1, 11) as Jour, count(id) as Tickets from tickets GROUP BY SUBSTRING(`created_at`, 1, 11)")->get();
-        //dd($results);
-
-        $tickets = DB::table('tickets')
-            ->groupBy(substr('created_at', 0, 10))
-            ->select(DB::raw('created_at, count(*) as tickets'))
-            ->get();
-
-        dd($tickets);
-
-        $tickets = DB::table('tickets')
-            ->select('count(*) as tickets, created_at')
-            ->groupBy(substr('created_at', 0, 10))
-            ->get();
-
-        dd($tickets);
-
         $tickets = Ticket::all();
         $result = [];
         foreach ($tickets as $ticket){
