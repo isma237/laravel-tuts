@@ -20,10 +20,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        foreach ($users as $user){
-            $user['roles'] = $user->roles;
-        }
-
         return view('user.index', ['users'=>  $users]);
     }
 
@@ -56,7 +52,7 @@ class UserController extends Controller
             $user->password = Hash::make($password);
             $user->save();
 
-            return view('user.index');
+            return redirect()->route('user.index');
         }
         dd("Email déjà présent en base de données");
 

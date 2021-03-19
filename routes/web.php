@@ -36,6 +36,10 @@ Route::get('/signin', [SigninController::class, 'index'])->name('login');
 Route::get('/signin/logout', [SigninController::class, 'logout']);
 Route::post('signin/login', [SigninController::class, 'login']);
 Route::get('/tickets',[TicketController::class, 'index'])->middleware('auth');
+Route::post('/tickets/{ticket_id}/{statut}' ,[TicketController::class, 'store'])->name('update-ticket');
+Route::get('/tickets/update' ,[TicketController::class, 'test']);
+
+Route::get('/stat', [DashboardController::class, 'statistique']);
 
 Route::get('/test', function (){
    return \Illuminate\Support\Facades\Auth::id();

@@ -26,27 +26,26 @@
                        aria-current="page" href="{{url('/')}}"
                     >Accueil</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link
-                            {{request()->is('dashboard') ? 'active' : ''}}"
-                       href="{{url('dashboard')}}"
-                    >Dashboard</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link
-                            {{request()->is('admin/user') ? 'active' : ''}}"
-                       href="{{url('admin/user')}}"
-                    >Espace administrateur</a>
-                </li>
-
                 @if(@auth()->check())
-
                     <li class="nav-item">
                         <a class="nav-link
                             {{request()->is('tickets') ? 'active' : ''}}"
                            href="{{url('tickets')}}"
                         >Mes tickets</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link
+                            {{request()->is('dashboard') ? 'active' : ''}}"
+                           href="{{url('dashboard')}}"
+                        >Dashboard</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link
+                            {{request()->is('admin/user') ? 'active' : ''}}"
+                           href="{{url('admin/user')}}"
+                        >Espace administrateur</a>
                     </li>
 
                     <li class="nav-item">
@@ -78,5 +77,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
         crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+@yield('script')
 </body>
 </html>

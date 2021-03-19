@@ -45,7 +45,7 @@ class Kernel extends HttpKernel
         ],
         'checkIfUserIsAdmin' => [
             \App\Http\Middleware\Authenticate::class,
-            CheckRole::class
+            \App\Http\Middleware\CheckRole::class
         ]
 
     ];
